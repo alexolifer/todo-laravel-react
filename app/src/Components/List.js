@@ -7,8 +7,12 @@ export default function List(props) {
             key={item.id}>
             <input type="checkbox"
                    className={"mr-3"}
-                   onClick={(e) => {
-                       props.onItemChecked(item)
+                   onClick={(evt) => {
+                       if (evt.target.checked) {
+                           props.onItemChecked(item, 'checked')
+                       } else {
+                           props.onItemChecked(item, 'unchecked')
+                       }
                    }}
             />
             {item.name}

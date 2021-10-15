@@ -11,15 +11,12 @@ export default function Todo() {
 
         getItems()
 
-        /*axios.get('http://127.0.0.1:8000/api/items')
-            .then(res => {
-                setItems(res.data)
-            })*/
     }, [])
 
     function getItems() {
         axios.get('http://127.0.0.1:8000/api/items')
             .then(res => {
+                console.log(res.data)
                 setItems(res.data)
             })
     }
@@ -37,10 +34,19 @@ export default function Todo() {
             )
     }
 
-    function onItemChecked(item) {
-        let itm = {
-            item: {
-                completed: true
+    function onItemChecked(item, status) {
+        let itm = {}
+        if (status === 'checked') {
+            itm = {
+                item: {
+                    completed: true
+                }
+            }
+        } else {
+            itm = {
+                item: {
+                    completed: false
+                }
             }
         }
 
@@ -61,9 +67,6 @@ export default function Todo() {
             .then(
                 getItems
             )
-
-        /*let filteredItems = items.filter(it => it.id !== item.id)
-        setItems(filteredItems)*/
     }
 
     return (
